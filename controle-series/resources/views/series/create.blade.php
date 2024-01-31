@@ -1,10 +1,25 @@
 <x-layout title="create">
-    <form action="/series/salvar" method="POST">
+
+    <form action="{{ route('series.store') }}" method="post">
         @csrf
-        <div class="mb-3">
-            <label for="nome" class="form-label">Nome:</label>
-            <input type="text" name="nome" id="nome" class="form-control">
+
+        <div class="row mb-3">
+            <div class="col-8">
+                <label for="nome" class="form-label">Nome:</label>
+                <input type="text" name="nome" id="nome" value="{{ old('nome') }}" autofocus class="form-control">
+            </div>
+
+            <div class="col-2">
+                <label for="seasonsQty" class="form-label">N° Temporadas:</label>
+                <input type="text" name="seasonsQty" id="seasonsQty" value="{{ old('seasonsQty') }}" class="form-control">
+            </div>
+
+            <div class="col-2">
+                <label for="episodesPerSeason" class="form-label">Eps / Temporada:</label>
+                <input type="text" name="episodesPerSeason" id="episodesPerSeason" value="{{ old('episodesPerSeason') }}" class="form-control">
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Adicionar</button>
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 </x-layout>
