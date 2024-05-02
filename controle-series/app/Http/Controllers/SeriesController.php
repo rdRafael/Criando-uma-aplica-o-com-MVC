@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SeriresFormRequest;
 use App\Models\Series;
 use App\Repositories\SeriesRepository;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SeriesController extends Controller
 {
@@ -17,6 +19,9 @@ class SeriesController extends Controller
     }
     public function index(Request $request): View
     {
+       if ( Auth::check() ) {
+        throw  new AuthenticationException();
+       }
         $series = Series::all();
         $mensagemSucesso = $request->session()->get(key: 'mensagem.sucesso');
         // $request->session()->forget('mensagem.sucesso');
